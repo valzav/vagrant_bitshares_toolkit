@@ -44,8 +44,8 @@ On Mac you may need to install a CA bundle to enable SSL communication with the 
 
 Then define two environement variables with Digital Ocean's client id and API key:
 
-	$ export ENV['DIGITALOCEAN_CLIENT_ID'] = 'xxxxxxx'
-	$ export ENV['DIGITALOCEAN_API_KEY'] = 'xxxxxxxxxxxx' 
+	$ export DIGITALOCEAN_CLIENT_ID="xxxxxxx"
+	$ export DIGITALOCEAN_API_KEY="xxxxxxxxxxxx"
 
 Now you can fire up your Digital Ocean isntance:
 
