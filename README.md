@@ -29,3 +29,24 @@ If you want it to use your host machine's development directory instead of creat
 just define BITSHARES_DEV_DIR environment variable before creating VM, e.g.
 
     $ export BITSHARES_DEV_DIR=/Users/user/bitshares_dev
+
+
+### Deploying to Digital Ocean
+
+Install vagrant-digitalocean plugin:
+
+	$ vagrant plugin install vagrant-digitalocean
+
+On Mac you may need to install a CA bundle to enable SSL communication with the Digital Ocean API:
+
+	$ brew install curl-ca-bundle
+	$ export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+
+Then define two environement variables with Digital Ocean's client id and API key:
+
+	$ export ENV['DIGITALOCEAN_CLIENT_ID'] = 'xxxxxxx'
+	$ export ENV['DIGITALOCEAN_API_KEY'] = 'xxxxxxxxxxxx' 
+
+Now you can fire up your Digital Ocean isntance:
+
+	$ vagrant up --provider digital_ocean
