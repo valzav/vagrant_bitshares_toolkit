@@ -16,17 +16,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     provider.api_key = ENV['DIGITALOCEAN_API_KEY']
   end
 
-  config.vm.provider :virtualbox do |v|
+  config.vm.provider :virtualbox do |v, override|
     v.customize ['modifyvm', :id, '--memory', '1024']
     v.customize ['modifyvm', :id, '--cpus', 4]
-    v.vm.box = 'ubuntu_trusty_x64'
-    v.vm.box_url = 'https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box'
-    v.vm.provision 'shell', :privileged => false, :path => 'provision.sh'
+    override.vm.box = 'ubuntu_trusty_x64'
+    override.vm.box_url = 'https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box'
+    override.vm.provision 'shell', :privileged => false, :path => 'provision.sh'
     #v.ssh.forward_agent = true
     #v.ssh.forward_x11 = true
     if ENV['BITSHARES_DEV_DIR']
       bitshares_dir = ENV['BITSHARES_DEV_DIR']
-      v.vm.synced_folder bitshares_dir, '/home/vagrant/bitshares'
+      override.vm.synced_folder bitshares_dir, '/home/vagrant/bitshares'
     end
   end
 
