@@ -9,6 +9,11 @@ Install VirtualBox, see https://www.virtualbox.org for details.
 
 Install Vagrant, see http://www.vagrantup.com for details.
 
+Define VAGRANT_KEY_PATH env variable - this is a path to your private key that you would use to connect your instance via ssh:
+e.g. :
+
+	$ export VAGRANT_KEY_PATH="~/.ssh/vagrant_key.pem"
+
 Clone this project and run vagrant:
 
     $ git clone https://github.com/valzav/vagrant_bitshares_toolkit.git
@@ -33,9 +38,10 @@ just define BITSHARES_DEV_DIR environment variable before creating VM, e.g.
 
 ### Deploying to Digital Ocean
 
-Install vagrant-digitalocean plugin:
+Install vagrant-digitalocean plugin and dummy box (vagrant needs box to be specified, so dummy box is used):
 
 	$ vagrant plugin install vagrant-digitalocean
+	$ vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
 
 On Mac you may need to install a CA bundle to enable SSL communication with the Digital Ocean API:
 
@@ -47,6 +53,23 @@ Then define two environement variables with Digital Ocean's client id and API ke
 	$ export DIGITALOCEAN_CLIENT_ID="xxxxxxx"
 	$ export DIGITALOCEAN_API_KEY="xxxxxxxxxxxx"
 
-Now you can fire up your Digital Ocean isntance:
+Now you can fire up a Digital Ocean isntance:
 
 	$ vagrant up --provider digital_ocean
+
+
+### Deploying to Amazon EC2
+
+Install aws plugin:
+
+	$ vagrant plugin install vagrant-aws
+
+Login to AWS console and create security group 'bitsharesxt' and allow SSH access.
+Define two env variables with your AWS security credentials:
+
+	$ export AWS_ACCESS_KEY="xxxxxxxxxx"
+	$ export AWS_SECRET_KEY="xxxxxxxxxxxxxxxxxxxxxxx"
+
+Start your instance:
+
+	$ vagrant up --provider=aws
