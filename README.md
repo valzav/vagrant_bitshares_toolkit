@@ -38,10 +38,10 @@ just define BITSHARES_DEV_DIR environment variable before creating VM, e.g.
 
 ### Deploying to Digital Ocean
 
-Install vagrant-digitalocean plugin and dummy box (vagrant needs box to be specified, so dummy box is used):
+Install vagrant-digitalocean plugin:
 
 	$ vagrant plugin install vagrant-digitalocean
-	$ vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+
 
 On Mac you may need to install a CA bundle to enable SSL communication with the Digital Ocean API:
 
@@ -60,9 +60,10 @@ Now you can fire up a Digital Ocean isntance:
 
 ### Deploying to Amazon EC2
 
-Install aws plugin:
+Install aws plugin and dummy box (vagrant needs a box to be specified, so dummy box is used):
 
 	$ vagrant plugin install vagrant-aws
+	$ vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
 
 Login to AWS console and create security group 'bitsharesxt' and allow SSH access.
 Define two env variables with your AWS security credentials:
