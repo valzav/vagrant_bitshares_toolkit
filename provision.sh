@@ -26,3 +26,6 @@ mkdir linux_build
 cd linux_build
 cmake ../bitshares_toolkit
 make
+
+# now if there were no build errors, you can run the client:
+# ./programs/client/bitshares_client
