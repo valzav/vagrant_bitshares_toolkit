@@ -15,11 +15,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.vm.box_url = 'https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box'
     provider.setup = true
     provider.ca_path = '/etc/ssl/certs/ca-certificates.crt'
-    provider.region = 'New York 1'
+    provider.region = 'nyc1'
     provider.image = 'Ubuntu 14.04 x64'
-    provider.size = '2GB'
-    provider.client_id = ENV['DIGITALOCEAN_CLIENT_ID']
-    provider.api_key = ENV['DIGITALOCEAN_API_KEY']
+    provider.size = '4GB'
+    provider.token = ENV['DIGITALOCEAN_TOKEN']
+    provider.ssh_key_name = 'vagrant'
   end
 
   config.vm.provider :aws do |aws, override|

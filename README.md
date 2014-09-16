@@ -12,7 +12,7 @@ Install Vagrant, see http://www.vagrantup.com for details.
 Define VAGRANT_KEY_PATH env variable - this is a path to your private key that you would use to connect your instance via ssh:
 e.g. :
 
-	$ export VAGRANT_KEY_PATH="~/.ssh/vagrant_key.pem"
+	$ export VAGRANT_KEY_PATH="~/.ssh/vagrant_key"
 
 Clone this project and run vagrant:
 
@@ -48,10 +48,10 @@ On Mac you may need to install a CA bundle to enable SSL communication with the 
 	$ brew install curl-ca-bundle
 	$ export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
 
-Then define two environement variables with Digital Ocean's client id and API key:
+Login to your Digital Account, create ssh key named "vagrant" using vagrant_key.pub, go to API section and create personal access token.
+Then define environement variable with Digital Ocean's API token:
 
-	$ export DIGITALOCEAN_CLIENT_ID="xxxxxxx"
-	$ export DIGITALOCEAN_API_KEY="xxxxxxxxxxxx"
+	$ export DIGITALOCEAN_TOKEN="xxxxxxx"
 
 Now you can fire up a Digital Ocean isntance:
 
