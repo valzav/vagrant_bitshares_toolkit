@@ -1,12 +1,15 @@
 VAGRANTFILE_API_VERSION = '2'
 
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = 'ubuntu_trusty_x64'
+  #config.vm.synced_folder ENV['BITSHARES_DEV_DIR'], '/home/vagrant/bitshares'
+  config.vm.provision "shell", path: "provision.sh", privileged: false
 
   # ssh forwarding maybe needed for future GUI clients
-  config.ssh.forward_agent = true
-  config.ssh.forward_x11 = true
+  # config.ssh.forward_agent = true
+  # config.ssh.forward_x11 = true
 
   config.vm.provider :digital_ocean do |provider, override|
     override.vm.hostname = 'bitsharesxt'
@@ -37,17 +40,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provider 'virtualbox' do |v|
-    v.customize ['modifyvm', :id, '--memory', '2048']
+    v.customize ['modifyvm', :id, '--memory', '4096']
     v.customize ['modifyvm', :id, '--cpus', 4]
-    v.vm.box_url = 'https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box'
-    v.vm.provision 'shell', :privileged => false, :path => 'provision.sh'
-    v.ssh.private_key_path = ENV['VAGRANT_KEY_PATH']
-    if ENV['BITSHARES_DEV_DIR']
-      bitshares_dir = ENV['BITSHARES_DEV_DIR']
-      v.vm.synced_folder bitshares_dir, '/home/vagrant/bitshares'
-    end
   end
-
-  config.vm.provision 'shell', :privileged => false, :path => 'provision.sh'
 
 end
