@@ -4,22 +4,18 @@ VAGRANTFILE_API_VERSION = '2'
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = 'ubuntu_trusty_x64'
-  #config.vm.synced_folder ENV['BITSHARES_DEV_DIR'], '/home/vagrant/bitshares'
   config.vm.provision "shell", path: "provision.sh", privileged: false
+  config.ssh.username = 'vagrant'
 
-  # ssh forwarding maybe needed for future GUI clients
-  # config.ssh.forward_agent = true
-  # config.ssh.forward_x11 = true
-
+  # look for more options here https://github.com/smdahlen/vagrant-digitalocean
   config.vm.provider :digital_ocean do |provider, override|
-    override.vm.hostname = 'bitsharesxt'
+    override.vm.hostname = 'graphene'
     override.ssh.private_key_path = ENV['VAGRANT_KEY_PATH']
     override.vm.box = 'digital_ocean'
     override.vm.box_url = 'https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box'
     provider.setup = true
-    provider.ca_path = '/etc/ssl/certs/ca-certificates.crt'
-    provider.region = 'nyc1'
-    provider.image = 'Ubuntu 14.04 x64'
+    provider.region = 'nyc2'
+    provider.image = 'ubuntu-14-04-x64'
     provider.size = '4GB'
     provider.token = ENV['DIGITALOCEAN_TOKEN']
     provider.ssh_key_name = 'vagrant'

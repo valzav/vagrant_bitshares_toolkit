@@ -55,10 +55,14 @@ Then define environement variable with Digital Ocean's API token:
 
 Now you can fire up a Digital Ocean isntance:
 
-	$ vagrant up --provider digital_ocean
+	$ vagrant up --provider digital_ocean --no-provision
+
+  $ vagrant provision
+
+Please note that provision is run as separate step - this is due to this bug https://github.com/smdahlen/vagrant-digitalocean/issues/174
 
 
-### Deploying to Amazon EC2
+### Deploying to Amazon EC2 (not well tested)
 
 Install aws plugin and dummy box (vagrant needs a box to be specified, so dummy box is used):
 
